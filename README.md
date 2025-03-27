@@ -29,7 +29,7 @@ ZKDAO: Anonymous Voting in DAOs using Zero-Knowledge Proofs on Polkadot
 
 ### Goal
 
-Show anonymous voting where a voter proves eligibility via a **hash of a shared secret**, without revealing identity — and vote is only accepted once.
+Showing anonymous voting where a voter proves eligibility via a **hash of a shared secret**, without revealing identity — and vote is only accepted once.
 
 ---
 
