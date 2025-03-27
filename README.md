@@ -137,9 +137,9 @@ You can deploy with a different `hash(secret)` for each eligible voter or use a 
 
 
 ## Conclusions
-1. Feasibility: Anonymous voting in DAOs using ZKPs is achievable with Polkadot's ink! and off-chain proof generation tools.
-2. Best Fit ZK Tool: ZoKrates is developer-friendly and integrates well with off-chain/on-chain communication flow.
-3. Privacy-Utility Tradeoff: Off-chain proof generation ensures privacy but adds complexity to UX; future enhancements could explore on-chain verification or MPC.
-4. Business Case: Anonymous, verifiable governance is essential for DAOs where vote coercion or privacy concerns exist — this adds real-world value to DAO operations.
-5. Scalability Potential: Can be extended to quadratic voting, weighted voting, or privacy-preserving referendums.
+1. `Feasibility`: Anonymous voting in DAOs using ZKPs is achievable with Polkadot's ink! and off-chain proof generation tools.
+2. `Best Fit ZK Tool`: ZoKrates is developer-friendly and integrates well with off-chain/on-chain communication flow.
+3. `Privacy-Utility Tradeoff`: Off-chain proof generation ensures privacy but adds complexity to UX; future enhancements could explore on-chain verification or MPC.
+4. `Business Case`: Anonymous, verifiable governance is essential for DAOs where vote coercion or privacy concerns exist — this adds real-world value to DAO operations.
+5. `Scalability Potential`: Can be extended to quadratic voting, weighted voting, or privacy-preserving referendums.
 
