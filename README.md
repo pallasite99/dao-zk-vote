@@ -20,6 +20,122 @@ ZKDAO: Anonymous Voting in DAOs using Zero-Knowledge Proofs on Polkadot
 | **PVM Compatibility**         | Verified that ink! contracts can accept off-chain ZK proof data as input. Researched potential for future on-chain verification integration. |
 | **DAO Governance Patterns**   | Analyzed existing DAO voting structures to align with realistic governance flows. |
 
+## Demo (Expected flow)
+
+### Goal
+
+Show anonymous voting where a voter proves eligibility via a **hash of a shared secret**, without revealing identity — and vote is only accepted once.
+
+---
+
+## Prerequisites
+
+- `cargo-contract` installed
+- Contract built via: `cargo contract build`
+- Access to [Contracts UI](https://contracts-ui.substrate.io)
+- Rust installed for CLI hash generator
+
+---
+
+## Test Simulation
+
+### 1. Generate the ZK Hash (Simulated)
+
+```bash
+cd client
+cargo run --bin generate_hash
+```
+
+### Sample Output
+
+```bash
+Secret: "my-secret-code"
+Hash (hex): 0x6f9249aef23606f3d8fc214624cb4bcce7a37c0ea190cb5ff1a3e1eb6e55800b
+```
+
+---
+
+### 2. Deploy Smart Contract with Hash
+
+Go to: [https://contracts-ui.substrate.io](https://contracts-ui.substrate.io)
+
+- Click **Upload contract**
+- Upload the `.contract` file from `contracts/dao_zk_vote/target/ink`
+- Constructor: pass the hash from above:
+  
+```bash
+0x6f9249aef23606f3d8fc214624cb4bcce7a37c0ea190cb5ff1a3e1eb6e55800b
+```
+
+- Click **Deploy**
+
+---
+
+### 3. Cast a Valid Vote
+
+Call the `vote` method:
+
+- `choice`: `true` (for "yes")
+- `secret`: `"my-secret-code"` as UTF-8 bytes
+
+In UI:
+- Choose `Vec<u8>` input
+- Type: `["109", "121", "-", "115", "101", "99", "114", "101", "116", "-", "99", "111", "100", "101"]`
+
+> Tip: You can convert strings to UTF-8 byte arrays [here](https://onlineutf8tools.com/convert-text-to-utf8)
+
+Result: `true`  
+Explanation: Proof was valid, vote accepted
+
+---
+
+### 4. Check Vote Result
+
+Call: `get_results()`
+
+Output:
+```bash
+(1, 0)
+```
+
+---
+
+### ❌ 5. Try Reusing the Same Secret
+
+Call `vote` again with the same secret:
+
+❌ Output: `false`  
+📟 Explanation: Contract zeroes the hash after one use to prevent re-voting
+
+---
+
+### ❌ 6. Try Voting with Wrong Secret
+
+Use `"wrong-secret"` → its hash won't match
+
+❌ Output: `false`  
+📟 Explanation: Invalid proof (hash mismatch)
+
+---
+
+### Summary
+
+| Action                         | Input                 | Expected Result | Status |
+|-------------------------------|------------------------|-----------------|--------|
+| Deploy contract               | `hash(secret)`         | Contract deployed | ✅     |
+| Vote with correct secret      | `"my-secret-code"`     | Vote accepted    | ✅     |
+| View results                  | -                      | `(1, 0)`         | ✅     |
+| Vote again with same secret   | `"my-secret-code"`     | Rejected         | ✅     |
+| Vote with wrong secret        | `"wrong-secret"`       | Rejected         | ✅     |
+
+---
+
+### Bonus: Add More Voters
+
+You can deploy with a different `hash(secret)` for each eligible voter or use a list/Merkle tree approach (next phase).
+
+
+
 ## Conclusions
 1. Feasibility: Anonymous voting in DAOs using ZKPs is achievable with Polkadot's ink! and off-chain proof generation tools.
 2. Best Fit ZK Tool: ZoKrates is developer-friendly and integrates well with off-chain/on-chain communication flow.
