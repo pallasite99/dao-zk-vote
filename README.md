@@ -10,6 +10,8 @@ ZKDAO: Anonymous Voting in DAOs using Zero-Knowledge Proofs on Polkadot
 ## ZK Proof Concept
 ![image](https://github.com/user-attachments/assets/023fd870-999f-4a48-a76a-9c95edce20a0)
 
+![ClassDiag_HackathonDAO](https://github.com/user-attachments/assets/6514ef02-ece9-4105-af80-bf2ceab1b305)
+
 ![SeqD-ZKProof](https://github.com/user-attachments/assets/3b75aad5-9f2d-4b64-8251-37a8685f5025)
 
 
