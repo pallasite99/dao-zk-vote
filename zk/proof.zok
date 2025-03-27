@@ -1,0 +1,8 @@
+// Simple 3-level Merkle proof using SHA256
+import "hashes/sha256/512bitPacked" as sha256packed
+
+def main(private field leaf, private field[3] proof, field root) -> bool:
+    field current = leaf
+    for u32 i in 0..3:
+        current = sha256packed([current, proof[i]])[0]
+    return current == root
