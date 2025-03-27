@@ -1,0 +1,9 @@
+/target
+/.idea
+*.contract
+*.wasm
+*.json
+*.zkey
+proof.json
+witness
+out
